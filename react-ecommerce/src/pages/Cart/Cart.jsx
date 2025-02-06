@@ -13,7 +13,7 @@ export default function Cart() {
   return (
     <section className="fixed top-0 right-0 bottom-0 left-0 z-20 bg-[rgba(241,245,249,0.5)]" onClick={()=>dispatch(changeCartStatus())}>
      <div>
-      <div className="flex flex-col gap-2 w-full md:w-2/5 px-3 overflow-auto fixed top-0 bottom-0 right-0 z-30 bg-white py-6" onClick={(e)=>e.stopPropagation()}>
+      <div className="flex flex-col gap-2 w-full md:w-1/2 lg:w-2/5 xl:w-1/3 px-3 overflow-auto fixed top-0 bottom-0 right-0 z-30 bg-white py-6" onClick={(e)=>e.stopPropagation()}>
         <div className="flex px-4 justify-between items-center">
             <FontAwesomeIcon icon={faTimes} className="text-2xl font-extrabold cursor-pointer text-black" onClick={()=>dispatch(changeCartStatus())} />
             <h1 className="text-2xl font-semibold">

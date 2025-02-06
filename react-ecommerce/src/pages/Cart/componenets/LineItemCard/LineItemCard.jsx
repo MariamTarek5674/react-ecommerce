@@ -10,8 +10,8 @@ export default function LineItemCard({product}) {
     <>
     <div v-if="!loading" className="flex justify-between h-[100px] ">
          <div className="flex w-1/4 h-full gap-2">
-            <img className="h-full object-contain" src={product.image} alt="" />
-            <div className="flex flex-col justify-center items-start whitespace-nowrap">
+            <img className="w-2/3 h-full object-contain" src={product.image} alt="" />
+            <div className="w-1/3 flex flex-col justify-center items-start whitespace-nowrap">
                 <div className="text-left product-title">
                         {product.title.length>18? product.title.substring(0,18)+"..." :product.title}
                 </div>
