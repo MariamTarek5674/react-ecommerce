@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import ProductCard from './components/ProductCard/ProductCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faPlus } from '@fortawesome/free-solid-svg-icons';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import EmptyState from './components/EmptyState/EmptyState';
 import { fetchAllProducts,fetchPageProducts,setSortOption, loadMoreProducts ,sortProducts} from '../../lib/productsSlice';
 import toast from 'react-hot-toast';
 import ProductsLoadingSkeleton from './components/ProductsLoadingSkeleton/ProductsLoadingSkeleton';
 import { useDispatch,useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 
 export default function Products() {
     const dispatch = useDispatch()
@@ -43,10 +43,15 @@ export default function Products() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-end items-center px-8 pt-8">
+      <div className="flex justify-between items-center pt-8">
+       <Link to='/create/product'>
+           <button className='flex gap-2 items-center justify-center text-gray-700 text-sm font-semibold rounded-full cursor-pointer border-2 border-gray-700 whitespace-nowrap py-[.5rem] px-[1rem] hover:bg-gray-700 hover:text-white transition-all duration-300'>
+              <FontAwesomeIcon icon={faPlus}/> <span>Create Product</span> 
+           </button>
+        </Link>
         <div className="relative">
           <select
-            className="appearance-none bg-white border-2 border-black text-black font-semibold rounded-full text-sm py-2.5 pl-5 pr-8 focus:border-black outline-0 relative"
+            className="appearance-none cursor-pointer bg-white border-2 border-black text-black font-semibold rounded-full text-sm py-2.5 pl-5 pr-8 focus:border-black outline-0 relative"
             value={sortOption}
             onChange={(e) => handleSortOptionChange(e.target.value)}
           >
