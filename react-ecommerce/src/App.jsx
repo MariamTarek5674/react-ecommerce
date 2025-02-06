@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
 import { store } from './lib/store';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
+import CreateProduct from './pages/CreateProduct/CreateProduct';
 let routes = createBrowserRouter([
   {
     path: "",
@@ -21,6 +22,12 @@ let routes = createBrowserRouter([
         path:'/product/:id',
         element:(
           <ProductDetails/>
+        )
+      },
+      {
+        path:'/create/product',
+        element:(
+          <CreateProduct/>
         )
       }
       // {
