@@ -5,16 +5,19 @@ import ProductDetailsSkeleton from './components/ProductDetailsSkeleton.jsx/Prod
 import RatingStar from '../../components/Products/components/RatingStar/RatingStar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretLeft } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../lib/cartSlice';
 export default function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(false);
-  
+
+    const dispatch = useDispatch()
+
     async function fetchProductById(){
       try{
         setLoading(true)
         const response = await axios.get(`https://fakestoreapi.com/products/${id}`);
-        console.log(response.data);
         if(response.status==200)
         setProduct(response.data);
         setLoading(false)
@@ -50,7 +53,10 @@ export default function ProductDetails() {
                 <p className="text-lg font-thin">{ product?.description }</p>
                 <RatingStar productRate={product?.rating?.rate}/>
                 <p className="text-lg">{ product?.price } EGP</p>
-                <button className="text-lg w-full border-2 border-black font-bold whitespace-nowrap py-[.5rem] px-[1rem] transition-all duration-300 hover:bg-gray-700 hover:text-white cursor-pointer">Add To Cart +</button>
+                <button className="text-lg w-full border-2 border-black font-bold whitespace-nowrap py-[.5rem] px-[1rem] transition-all duration-300 hover:bg-gray-700 hover:text-white cursor-pointer"
+                  onClick={()=>dispatch(addToCart(product))}>
+                  Add To Cart +
+                </button>
             </div>
         </div>
     </section>
