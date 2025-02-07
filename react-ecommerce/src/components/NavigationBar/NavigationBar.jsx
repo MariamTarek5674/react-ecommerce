@@ -16,8 +16,6 @@ export default function NavigationBar() {
   function handleLogout(){
     dispatch(logout())
     navigate('/login')
-    window.location.reload()
-
   }
   return (
     <nav className='fixed top-0 right-0 left-0 py-5 z-20 bg-white shadow-md'>

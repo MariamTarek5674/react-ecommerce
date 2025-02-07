@@ -28,6 +28,7 @@ export const authSlice = createSlice({
     reducers: {
         logout(state) {
             localStorage.clear()
+            state.isAuthanticated=false
         }
     },
     extraReducers: (builder) => {

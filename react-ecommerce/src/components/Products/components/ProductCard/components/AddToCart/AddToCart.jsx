@@ -51,7 +51,7 @@ export default function AddToCart({product}) {
             <button className='w-10 h-10 flex items-center justify-center rounded-full font-semibold gap-1 border-2  border-black text-black bg-white text-2xl shadow-2xl hover:cursor-pointer hover:bg-slate-800 hover:border-slate-800 hover:text-white transition-all duration-300'
                 onClick={() => handleAddToCart()}>
                   {
-                    isInCart? <span className='text-sm'>x{quantityInCart}</span> :
+                    isInCart && isAuthanticated? <span className='text-sm'>x{quantityInCart}</span> :
                     '+'
                   }
              </button>
