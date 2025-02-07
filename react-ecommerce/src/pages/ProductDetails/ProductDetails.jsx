@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductDetailsSkeleton from './components/ProductDetailsSkeleton.jsx/ProductDetailsSkeleton';
 import RatingStar from '../../components/Products/components/RatingStar/RatingStar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCaretLeft } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../lib/cartSlice';
+
 export default function ProductDetails() {
     const { id } = useParams();
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(false);
+    const {isAuthanticated} = useSelector((state) => state.auth);
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     async function fetchProductById(){
@@ -31,6 +34,14 @@ export default function ProductDetails() {
     },[])
     if  (loading){
       return <ProductDetailsSkeleton/>
+    }
+
+    function handleAddToCart(){
+      if(isAuthanticated){
+        dispatch(addToCart(product))
+      }else{
+        navigate('/login')
+      }
     }
 
   return (
@@ -54,7 +65,7 @@ export default function ProductDetails() {
                 <RatingStar productRate={product?.rating?.rate}/>
                 <p className="text-lg">{ product?.price } EGP</p>
                 <button className="text-lg w-full border-2 border-black font-bold whitespace-nowrap py-[.5rem] px-[1rem] transition-all duration-300 hover:bg-gray-700 hover:text-white cursor-pointer"
-                  onClick={()=>dispatch(addToCart(product))}>
+                  onClick={()=>handleAddToCart()}>
                   Add To Cart +
                 </button>
             </div>

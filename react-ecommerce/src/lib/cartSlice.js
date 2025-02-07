@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 export const cartSlice= createSlice({
     name: 'cart',
     initialState: {
-        cartItems:JSON.parse(localStorage.getItem('cartItems')) || [],
+        cartItems:[],
         isCartOpen:false
     },
     reducers:{
@@ -23,7 +23,6 @@ export const cartSlice= createSlice({
                 item.quantity=1
                 state.cartItems.push(item);
                 toast.success('Product added to cart')
-                localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
             }
         },
         clearCart: (state) => {
@@ -38,10 +37,8 @@ export const cartSlice= createSlice({
                 if(newQuantity == 0){
                     state.cartItems = state.cartItems.filter((item) => item.id !== id); 
                     toast.success('Product removed from cart!')
-                    localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
                 }else{
                     item.quantity = newQuantity;
-                    localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
                 }
             }
         }

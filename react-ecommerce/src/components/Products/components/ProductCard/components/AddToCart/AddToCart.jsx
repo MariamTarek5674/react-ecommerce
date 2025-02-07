@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { addToCart, updateQuantity } from '../../../../../../lib/cartSlice'
+import { useNavigate } from 'react-router-dom'
 
 export default function AddToCart({product}) {
   const dispatch = useDispatch()
   const {cartItems} = useSelector((state)=>state.cart)
   const [showControls, setShowControls] = useState(false);
-
+  const {isAuthanticated} = useSelector((state)=> state.auth)
+  const navigate = useNavigate();
+  
   const cartItem = useMemo(() => cartItems.find((item) => item.id === product.id), [cartItems, product.id]);
   const isInCart = !!cartItem;
   const quantityInCart = cartItem?.quantity || 0;
@@ -18,6 +21,14 @@ export default function AddToCart({product}) {
       dispatch(updateQuantity({id:product.id, newQuantity:quantityInCart+1}))
     }else{
       dispatch(updateQuantity({id:product.id, newQuantity:quantityInCart-1}))
+    }
+  }
+
+  function handleAddToCart(){
+    if(isAuthanticated){
+      dispatch(addToCart(product))
+    }else{
+      navigate('/login')
     }
   }
 
@@ -38,13 +49,13 @@ export default function AddToCart({product}) {
             </div>
             : 
             <button className='w-10 h-10 flex items-center justify-center rounded-full font-semibold gap-1 border-2  border-black text-black bg-white text-2xl shadow-2xl hover:cursor-pointer hover:bg-slate-800 hover:border-slate-800 hover:text-white transition-all duration-300'
-                onClick={() => dispatch(addToCart(product))}>
+                onClick={() => handleAddToCart()}>
                   {
                     isInCart? <span className='text-sm'>x{quantityInCart}</span> :
                     '+'
                   }
              </button>
           }
-        </div>
+      </div>
   )
 }

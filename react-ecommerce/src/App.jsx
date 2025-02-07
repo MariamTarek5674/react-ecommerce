@@ -7,6 +7,10 @@ import { Provider } from 'react-redux';
 import { store } from './lib/store';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import CreateProduct from './pages/CreateProduct/CreateProduct';
+import Login from './pages/Login/Login';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import NotFound from './pages/NotFound/NotFound';
+
 let routes = createBrowserRouter([
   {
     path: "",
@@ -27,15 +31,23 @@ let routes = createBrowserRouter([
       {
         path:'/create/product',
         element:(
-          <CreateProduct/>
+          <ProtectedRoute>
+            <CreateProduct/>
+          </ProtectedRoute>
         )
-      }
-      // {
-      //   path: "*",
-      //   element: <Notfound />,
-      // },
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
     ],
   },
+  {
+    path:'/login',
+    element:(
+      <Login/>
+    )
+  }
 ]);
 
 function App() {
