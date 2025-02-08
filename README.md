@@ -27,15 +27,15 @@
 
 2. Product Details Page
    Displays detailed information about the selected product:
-     Image ,Title ,Description, Price,  RatingStars 
+     Image ,Title ,Description, Price,  RatingStars.
    Includes a "Back to Products" button to navigate back to the Product Listing Page.
    Includes a "Add To Cart" button :
-     if product in cart show cart drawer
-     if not add product to cart
+     if product in cart show cart drawer.
+     if not add product to cart.
 
-3. Create Product Page
+4. Create Product Page
    Provides a form to create a new product with the following fields:
-   Title (text input) ,Description (textarea) ,Price (number input) ,Category (dropdown fetched from /products/categories) ,Image URL (text input)
+   Title (text input) ,Description (textarea) ,Price (number input) ,Category (dropdown fetched from /products/categories) ,Image URL (text input).
    Form Validation: (with Yup and Formik)
      All fields are required.
      Price must be a positive number.
@@ -44,7 +44,7 @@
    Handles loading and error states during form submission.
    Disables the submit button during submission.
 
-4. Cart
+5. Cart
    Users can add products to the cart from: Product Listing Page, Product Details Page.
    Cart Page features:
      Displays selected products with image, name, quantity, and price.
@@ -52,10 +52,10 @@
      Users can:
        Update product quantities.
        Remove products from the cart.
-5. Authentication
+6. Authentication
      Implements login functionality using the /auth/login API endpoint.
        . Added a link to the form user can (continue as guest) to the home page
-       . you can login with  username: "mor_2314", password: "83r5^_" or any other user from /users api
+       . you can login with  username: "mor_2314", password: "83r5^_" or any other user from /users api.
      Restricts access to the following pages for logged-in users:
         Create Product Page , Cart Page.
      Displays the logged-in user’s name (in the cart drawer above) and a (logout button) in the navigationBar.
